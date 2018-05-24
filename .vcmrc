@@ -1,0 +1,15 @@
+{
+  "types": ["feature", "fix", "doc", "style", "refactor", "test", "chore", "revert"],
+  "scope": {
+    "required": true,
+    "allowed": ["*"],
+    "validate": false,
+    "multiple": false
+  },
+  "warnOnFail": false,
+  "maxSubjectLength": 100,
+  "subjectPattern": ".+",
+  "subjectPatternErrorMsg": "subject does not match subject pattern!",
+  "helpMessage": "\ngit commit规范：\n\nExample：\nfeature(ivr): change color of svg node\n\ntype -- 本次commit的类别，可选值：\n - feature：新功能\n - fix：修补bug\n - doc：文档\n - style： 格式(不影响代码运行的变动)\n - refactor：重构(即不是新增功能，也不是修改bug的代码变动)\n - test：增加测试 \n - chore：构建过程或辅助工具的变动\n\nscope -- 本次commit所属的需求名或影响范围\n\ndetail -- 本次commit的简短描述\n - 不超过50个字符\n - 以动词开头,使用现在时，如change、remove等\n - 首字母小写\n - 结尾不加句号(.)",
+  "autoFix": true
+}
