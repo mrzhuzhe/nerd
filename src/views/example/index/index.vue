@@ -7,6 +7,7 @@
 </template>
 
 <script>
+console.log("index loaded")
 export default {
     name: 'index',
     mixins: [],
@@ -24,7 +25,9 @@ export default {
     methods: {
 
     },
-
+    mounted() {
+      console.log(1)
+    },
     components: {
     }
 };

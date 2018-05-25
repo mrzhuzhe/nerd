@@ -1,8 +1,10 @@
-if (typeof window !== 'undefined') {
+/* if (typeof window !== 'undefined') {
     __webpack_require__.p = window.GLOBAL_STATIC_PATH + '/';
-}
+} */
+
+console.log('route')
 let route = [{
-    path: '/index',
+    path: '/example/test',
     name: 'index',
     meta: {
         title: '测试页面首页'

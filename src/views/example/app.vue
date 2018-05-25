@@ -8,7 +8,7 @@
 </template>
 
 <script>
-
+console.log("app loaded")
 export default {
     name: 'App',
     data() {

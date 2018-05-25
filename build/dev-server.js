@@ -27,7 +27,6 @@ var server = require('http').createServer(app);
 
 var compiler = webpack(webpackConfig)
 
-console.log(111, webpackConfig.output.publicPath)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
@@ -38,7 +37,6 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler, {
   log: () => {}
 })
 // force page reload when html-webpack-plugin template changes
-
 
 //compiler.plugin('compilation', function (compilation) {
 compiler.hooks.compilation.tap('compilation', compilation => {
@@ -51,7 +49,7 @@ compiler.hooks.compilation.tap('compilation', compilation => {
 //compiler.plugin("done", function(statsResult) {
 compiler.hooks.done.tap('done', statsResult => {
     hotMiddleware.publish({ action: 'reload' })
- });
+});
 
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {
@@ -63,10 +61,10 @@ Object.keys(proxyTable).forEach(function (context) {
   app.use(proxyMiddleware(options.filter || context, options))
 });
 
-/* app.get('/', function(req, res, next) {
-    var _path = '../src/views/example/index.html';
+app.get(/^\/example/, function(req, res, next) {
+    var _path = '../dist/example/index.html';
     res.end(fs.readFileSync(path.resolve(__dirname, _path), 'utf8'));
-}) */
+})
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())

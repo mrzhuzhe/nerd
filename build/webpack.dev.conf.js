@@ -14,8 +14,6 @@ var MyPlugin = require('./htmlPlugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 // add hot-reload related code to entry chunks
 
-console.log(config.build.assetsRoot)
-
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
 })
@@ -88,7 +86,21 @@ module.exports = merge(baseWebpackConfig, {
     /* new webpack.ProvidePlugin({
         d3: 'd3'
     })*/
-  ]
+  ],
+  optimization: {
+      splitChunks: {
+          cacheGroups: {
+              commons: {
+                  test: /[\\/]node_modules[\\/]/,
+                  name: "vendors",
+                  chunks: "all"
+              }
+          }
+      },
+      runtimeChunk: {
+        name: 'manifest'
+      }
+  }
 })
 
 
@@ -98,8 +110,8 @@ for(var page in pages) {
   console.log('page',page)
   var conf = {
     alwaysWriteToDisk: true,
-    filename: './src/views/' + page + '/index.html',
-    //  template: `!!raw-loader!./src/views/${page}/index.html`, //模板路径
+    filename: page + '/index.html',
+    template: `!!raw-loader!./src/views/${page}/index.html`, //模板路径
     inject: true,
     excludeChunks: Object.keys(pages).filter(item => {
       return (item != page)
