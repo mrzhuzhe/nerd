@@ -61,7 +61,8 @@ npm run build --report
     "http-proxy-middleware": "^0.18.0",     //  用于在webpack-dev-server中将请求代理到对应地址
     "less": "^3.0.4",   // less
     "less-loader": "^4.1.0",    // webpack less loader
-    "optimize-css-assets-webpack-plugin": "^4.0.1", // 解决 extract-text-webpack-plugin 插件产生的css 合并文件中有大量重复css的问题 
+    "optimize-css-assets-webpack-plugin": "^4.0.1", 
+    // 解决 extract-text-webpack-plugin 插件产生的css 合并文件中有大量重复css的问题 
     "ora": "^2.1.0",    // 在bash中产生一个原地打转的loading提示
     "raw-loader": "^0.5.1",
     "semver": "^5.5.0",
