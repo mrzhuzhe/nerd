@@ -4,9 +4,9 @@ var webpack = require('webpack')
 var config = require('../config')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
+//  var CopyWebpackPlugin = require('copy-webpack-plugin')
 //  var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
@@ -95,15 +95,13 @@ var webpackConfig = merge(baseWebpackConfig, {
       'process.env': env
     }),
     // extract css into its own file
-    new ExtractTextPlugin({
-      filename: (getPath) => {
-         return utils.assetsPath('css/' + getPath(`[name].css`).replace(/\//g, '_'));
-     },
+    new MiniCssExtractPlugin({
+      filename: utils.assetsPath('css/[name].css'),
       allChunks: true
     }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
-    new OptimizeCSSPlugin(),
+    //  new OptimizeCSSPlugin(),
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
@@ -145,14 +143,14 @@ var webpackConfig = merge(baseWebpackConfig, {
     }),
     */
     //copy custom static assets
-    new CopyWebpackPlugin([
+    /* new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static/base.css'),
         to: 'static/css/base.css',
         ignore: ['.*']
       }
 
-     ])
+    ]) */
   ],
   optimization: {
     minimizer: [
@@ -168,19 +166,26 @@ var webpackConfig = merge(baseWebpackConfig, {
           mangle: true
         },
         sourceMap: true
-      })
-    ]
-  },
-  /* any required modules inside node_modules are extracted to vendor
-     extract webpack runtime and module manifest to its own file in order to
-     prevent vendor hash from being updated whenever app bundle is updated */
-  splitChunks: {
-    cacheGroups: {
-        commons: {
-            test: /[\\/]node_modules[\\/]/,
-            name: "vendors",
-            chunks: "all"
+      }),
+      new OptimizeCSSPlugin({
+        cssProcessorOptions: {
+          autoprefixer: {
+            browsers: 'last 2 version, IE > 8'
+          }
         }
+      })
+    ],
+    /* any required modules inside node_modules are extracted to vendor
+       extract webpack runtime and module manifest to its own file in order to
+       prevent vendor hash from being updated whenever app bundle is updated */
+    splitChunks: {
+      cacheGroups: {
+          commons: {
+              test: /[\\/]node_modules[\\/]/,
+              name: "vendors",
+              chunks: "all"
+          }
+      }
     },
     runtimeChunk: {
       name: 'manifest'
@@ -191,24 +196,6 @@ var webpackConfig = merge(baseWebpackConfig, {
 /* if (process.env.NODE_ENV_INNER === 'development') {
      webpackConfig.plugins.splice(1,1);
 } */
-
-if (config.build.productionGzip) {
-  var CompressionWebpackPlugin = require('compression-webpack-plugin')
-
-  webpackConfig.plugins.push(
-    new CompressionWebpackPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: new RegExp(
-        '\\.(' +
-        config.build.productionGzipExtensions.join('|') +
-        ')$'
-      ),
-      threshold: 10240,
-      minRatio: 0.8
-    })
-  )
-}
 
 if (config.build.bundleAnalyzerReport) {
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin

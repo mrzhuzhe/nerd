@@ -9,7 +9,7 @@ res +=  `<h1>组件</h1>\n\r
 `
 nss.forEach((ns) => {
     res += `<h1>${ns}</h1>\n\r`;
-    var url = `../src/pages/${ns}/route.config.js`;
+    var url = `../src/views/${ns}/route.config.js`;
     delete require.cache[require.resolve(url)];
     var routes =  require(url);
     var table = `<table>

@@ -11,7 +11,9 @@ var HtmlHardDisk = require('html-webpack-harddisk-plugin');
 var fs = require('fs-extra');
 var path = require('path');
 var MyPlugin = require('./htmlPlugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // add hot-reload related code to entry chunks
 
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -62,12 +64,10 @@ module.exports = merge(baseWebpackConfig, {
       'process.env': config.dev.env
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
-    /* new ExtractTextPlugin({
-      filename: (getPath) => {
-         return utils.assetsPath('css/' + getPath(`[name].css`).replace(/\//g, '_'));
-      },
-      allChunks: true
-    }), */
+    new MiniCssExtractPlugin({
+      filename: utils.assetsPath('css/[name].css'),
+      //  allChunks: true
+    }),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
 
@@ -94,12 +94,40 @@ module.exports = merge(baseWebpackConfig, {
                   test: /[\\/]node_modules[\\/]/,
                   name: "vendors",
                   chunks: "all"
+              },
+              styles: {
+                name: 'styles',
+                test: /\.css$/,
+                chunks: 'all',
+                enforce: true
               }
           }
       },
       runtimeChunk: {
         name: 'manifest'
-      }
+      },
+      minimizer: [
+        // we specify a custom UglifyJsPlugin here to get source maps in production
+        new UglifyJsPlugin({
+          cache: true,
+          parallel: true,
+          uglifyOptions: {
+            compress: {
+              warnings: false
+            },
+            ecma: 6,
+            mangle: true
+          },
+          sourceMap: true
+        }),
+        new OptimizeCSSPlugin({
+          cssProcessorOptions: {
+            autoprefixer: {
+              browsers: 'last 2 version, IE > 8'
+            }
+          }
+        })
+      ]
   }
 })
 
@@ -120,6 +148,7 @@ for(var page in pages) {
   // 需要生成几个html文件，就配置几个HtmlWebpackPlugin对象
   module.exports.plugins.push(new HtmlWebpackPlugin(conf))
 }
-//  module.exports.plugins.push(new MyPlugin({env: 'dev'}))
+
+module.exports.plugins.push(new MyPlugin({env: 'dev'}))
 
 module.exports.plugins.push(new HtmlHardDisk())

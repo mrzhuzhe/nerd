@@ -4,7 +4,7 @@
 
 console.log('route')
 let route = [{
-    path: '/example/test',
+    path: '/example/index',
     name: 'index',
     meta: {
         title: '测试页面首页'

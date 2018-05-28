@@ -15,7 +15,7 @@ var webpackConfig = require('./webpack.prod.conf')
 var spinner = ora('building for production...')
 spinner.start()
 
-var download = function(url, dest, cb) {
+/*  var download = function(url, dest, cb) {
   var file = fs.createWriteStream(dest);
   var request = http.get(url, function(response) {
     response.pipe(file);
@@ -26,7 +26,7 @@ var download = function(url, dest, cb) {
     fs.unlink(dest); // Delete the file async. (But we don't check the result)
     if (cb) cb();
   });
-};
+}; */
 
 var pack = function() {
     webpack(webpackConfig, function (err, stats) {
@@ -48,11 +48,13 @@ var pack = function() {
     })
 };
 
-var dest = path.resolve(__dirname, '../offline/vhtml/vue.prod.js');
+pack()
+
+/* var dest = path.resolve(__dirname, '../offline/vhtml/vue.prod.js');
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err
   rm(dest, err => {
       if (err) throw err
       download('http://bqq.gtimg.com/vhtml/latest/vue.prod.js', dest, pack)
   })
-})
+}) */
