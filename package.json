@@ -6,7 +6,10 @@
   "scripts": {
     "test": "test",
     "dev": "node build/dev-server.js",
-    "build": "node build/build-dev.js"
+    "build": "node build/build-dev.js",
+    "eslint": "./node_modules/.bin/eslint",
+    "lint-fix": "eslint --quiet --fix",
+    "pretty": "node pretty.js"
   },
   "keywords": [
     "webpack",
@@ -24,9 +27,12 @@
     "babel-preset-stage-2": "^6.24.1",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
+    "commander": "^2.15.1",
     "connect-history-api-fallback": "^1.5.0",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-plugin-vue": "^4.5.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.16.3",
     "friendly-errors-webpack-plugin": "^1.7.0",
@@ -35,6 +41,7 @@
     "html-webpack-harddisk-plugin": "^0.2.0",
     "html-webpack-plugin": "^3.2.0",
     "http-proxy-middleware": "^0.18.0",
+    "lerna": "^2.11.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.0",
@@ -42,6 +49,7 @@
     "ora": "^2.1.0",
     "raw-loader": "^0.5.1",
     "semver": "^5.5.0",
+    "staged-git-files": "^1.1.1",
     "vue-loader": "^15.2.0",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.8.3",
@@ -59,6 +67,12 @@
     "last 2 versions",
     "ie > 8"
   ],
+  "lint-staged": {
+    "packages/**/*.{js,vue}": "eslint",
+    "test/**/*": "eslint",
+    "src/**/*": "eslint",
+    "build/**/*": "eslint"
+  },
   "dependencies": {
     "vue": "^2.5.16",
     "vue-router": "^3.0.1"
