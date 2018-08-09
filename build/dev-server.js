@@ -84,9 +84,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // serve pure static assets
-//var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
+var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 // console.log(staticPath);
-//app.use(staticPath, express.static('./static'))
+app.use(staticPath, express.static('./static'))
 
 var uri = 'http://localhost:' + port
 

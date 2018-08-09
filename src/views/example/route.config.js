@@ -2,7 +2,6 @@
     __webpack_require__.p = window.GLOBAL_STATIC_PATH + '/';
 } */
 
-console.log('route')
 let route = [{
     path: '/example/index',
     name: 'index',
