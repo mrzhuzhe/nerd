@@ -35,6 +35,12 @@
 </template>
 
 <script>
+
+import {
+  labels,
+  data
+} from './test';
+
 export default {
     name: 'index',
     mixins: [],
@@ -104,15 +110,22 @@ export default {
     			}
       }
       , generateDataList () {
-        var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var MONTHS = [];
         this.list = {
-            labels: MONTHS,
+            labels: labels,
             datasets: [{
               label: 'dataset 01',
     					backgroundColor: this.chartColors.red,
     					borderColor: this.chartColors.red,
               fill: false,
-              data: [20, 10, 12, 2, 123, 34, 123, 123, 12, 12, 2, 3, 9]
+              data: data
+            }
+            ,{
+              label: 'dataset 01',
+    					backgroundColor: this.chartColors.blue,
+    					borderColor: this.chartColors.blue,
+              fill: false,
+              data: data
             }]
           }
       }
