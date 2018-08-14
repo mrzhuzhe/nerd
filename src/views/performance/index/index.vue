@@ -5,29 +5,28 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label" >开始时间：</label>
           <div class="col-sm-4">
-            <input class="form-control datetimepicker" type="text" value="">
+            <input class="form-control datetimepicker" type="text" id="start" :value="start" >
           </div>
           <label class="col-sm-2 col-form-label" >结束时间：</label>
           <div class="col-sm-4">
-            <input class="form-control datetimepicker" type="text" value="">
+            <input class="form-control datetimepicker" type="text" id="end" :value="end">
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label" >类型：</label>
+          <label class="col-sm-2 col-form-label"  >站点id：</label>
           <div class="col-sm-4">
-            <select class="form-control" >
-              <option>PV</option>
-              <option>UV</option>
+            <select class="form-control" v-model="site_id" >
+              <option v-for="i in siteList" :value="i.v" >{{i.t}}</option>
             </select>
           </div>
         </div>
         <div class="form-group row">
           <div class="col-sm-10">
-            <button type="button" class="btn btn-primary col-sm-2">搜索</button>
+            <button type="button" class="btn btn-primary col-sm-2" @click="getListData()" >搜索</button>
           </div>
         </div>
       </form>
-      <div class="col-sm-8">
+      <div class="col-sm-10">
         <canvas width="960" height="500" id="myChart" ></canvas>
       </div>
     </div>
@@ -36,10 +35,11 @@
 
 <script>
 
-import {
-  labels,
-  data
-} from './test';
+const axios = require('axios');
+const siteList = [{
+  t: 'test01',
+  v: 'http://starofus.com/performans.html'
+}];
 
 export default {
     name: 'index',
@@ -48,6 +48,11 @@ export default {
     },
     data() {
         return {
+          start: this.now(-15*60),
+          end: this.now(),
+          siteList,
+          site_id: siteList[0].v,
+          interval: 30,
           list: [],
           options: {},
           chartColors: {
@@ -66,9 +71,33 @@ export default {
     },
 
     methods: {
-      initChart () {
-        this.generateDataList();
-        this.generateOpts();
+      now (d) {
+        d = d || 0;
+        var _n = new Date();
+            _n = new Date(_n.getTime() + d * 1000);
+        var _month = _n.getMonth() + 1;
+        return _n.getFullYear() + '-' + ( _month <=9 ? '0' + _month : _month ) + '-' + _n.getDate() + ' ' + _n.getHours() + ':' + _n.getMinutes()
+      },
+      getListData () {
+        var _start = document.querySelector('#start').value.replace(/[\-\ \:]/g, '') + '00',
+            _end = document.querySelector('#end').value.replace(/[\-\ \:]/g, '') + '00';
+        var _url = 'http://t.imaisu.com/api/event_data?start=' + _start + '&end=' + _end + '&interval=' + this.interval + '&id=' + this.site_id;
+        axios.get(_url)
+          .then( response => {
+            // handle success
+            var _data = response.data.list;
+            this.list = this.generateDataList(_data);
+            this.options = this.generateOpts(_data);
+            console.log(this.list, this.options)
+            this.initChart();
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          });
+      }
+      , initChart () {
+        console.log(this.list, this.options)
         var ctx = document.getElementById('myChart').getContext('2d');
         var myLineChart = new Chart(ctx, {
             type: 'line',
@@ -76,12 +105,12 @@ export default {
             options: this.options
         });
       }
-      , generateOpts () {
-        this.options = {
+      , generateOpts (data) {
+        return {
     				responsive: true,
     				title: {
     					display: true,
-    					text: 'Chart.js Line Chart'
+    					text: '访客趋势'
     				},
     				tooltips: {
     					mode: 'index',
@@ -96,36 +125,41 @@ export default {
     						display: true,
     						scaleLabel: {
     							display: true,
-    							labelString: 'Month'
+    							labelString: '访问人数'
     						}
     					}],
     					yAxes: [{
     						display: true,
     						scaleLabel: {
     							display: true,
-    							labelString: 'Value'
+    							labelString: '时间'
     						}
     					}]
     				}
     			}
       }
-      , generateDataList () {
-        var MONTHS = [];
-        this.list = {
-            labels: labels,
+      , generateDataList (data) {
+        var labels = [], pvData = [], uvData = [];
+        data.forEach((e, i) => {
+          labels.push(e.time);
+          pvData.push(e.pv);
+          uvData.push(e.uv);
+            })
+        return {
+            labels,
             datasets: [{
-              label: 'dataset 01',
+              label: 'UV',
     					backgroundColor: this.chartColors.red,
     					borderColor: this.chartColors.red,
               fill: false,
-              data: data
+              data: pvData
             }
             ,{
-              label: 'dataset 01',
+              label: 'PV',
     					backgroundColor: this.chartColors.blue,
     					borderColor: this.chartColors.blue,
               fill: false,
-              data: data
+              data: uvData
             }]
           }
       }
@@ -142,7 +176,7 @@ export default {
     },
 
     mounted() {
-      this.initChart();
+      this.getListData();
       this.initDatePicker();
     },
     components: {
