@@ -148,14 +148,14 @@ export default {
         return {
             labels,
             datasets: [{
-              label: 'UV',
+              label: 'PV',
     					backgroundColor: this.chartColors.red,
     					borderColor: this.chartColors.red,
               fill: false,
               data: pvData
             }
             ,{
-              label: 'PV',
+              label: 'UV',
     					backgroundColor: this.chartColors.blue,
     					borderColor: this.chartColors.blue,
               fill: false,

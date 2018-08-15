@@ -3,7 +3,7 @@
 } */
 
 let route = [{
-    path: '/performance/index',
+    path: '/perf',
     name: 'index',
     meta: {
         title: '测试页面首页'
