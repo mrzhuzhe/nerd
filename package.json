@@ -6,7 +6,7 @@
   "scripts": {
     "test": "test",
     "dev": "node build/dev-server.js",
-    "build": "node build/build-dev.js",
+    "build": "node build/build-prod.js",
     "eslint": "./node_modules/.bin/eslint",
     "lint-fix": "eslint --quiet --fix",
     "pretty": "node pretty.js"

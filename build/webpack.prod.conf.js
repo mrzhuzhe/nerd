@@ -5,7 +5,7 @@ var config = require('../config')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 //  var CopyWebpackPlugin = require('copy-webpack-plugin')
-//  var HtmlWebpackPlugin = require('html-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -200,6 +200,23 @@ var webpackConfig = merge(baseWebpackConfig, {
 if (config.build.bundleAnalyzerReport) {
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+}
+
+var pages = utils.getEntries('./src/views/**/main.js');
+for(var page in pages) {
+  // 配置生成的html文件，定义路径等
+  console.log('page',page)
+  var conf = {
+    alwaysWriteToDisk: true,
+    filename: page + '/index.html',
+    template: `!!raw-loader!./src/views/${page}/index.html`, //模板路径
+    inject: true,
+    excludeChunks: Object.keys(pages).filter(item => {
+      return (item != page)
+    })
+  }
+  // 需要生成几个html文件，就配置几个HtmlWebpackPlugin对象
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf))
 }
 
 module.exports = webpackConfig
