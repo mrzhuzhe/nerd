@@ -62,7 +62,7 @@ Object.keys(proxyTable).forEach(function (context) {
   app.use(proxyMiddleware(options.filter || context, options))
 });
 
-app.get(/^\/(example|performance)/, function(req, res, next) {
+app.get(/^\/(example)/, function(req, res, next) {
     var _paths = req.url.split('/');
     var _baseUrl = '../dist/' + _paths[1] + '/index.html';
     res.end(fs.readFileSync(path.resolve(__dirname, _baseUrl), 'utf8'));
