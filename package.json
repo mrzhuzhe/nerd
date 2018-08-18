@@ -6,7 +6,7 @@
   "scripts": {
     "test": "test",
     "dev": "node build/dev-server.js",
-    "build": "node build/build-dev.js",
+    "build": "node build/build-prod.js",
     "eslint": "./node_modules/.bin/eslint",
     "lint-fix": "eslint --quiet --fix",
     "pretty": "node pretty.js"
@@ -41,7 +41,6 @@
     "html-webpack-harddisk-plugin": "^0.2.0",
     "html-webpack-plugin": "^3.2.0",
     "http-proxy-middleware": "^0.18.0",
-    "lerna": "^2.11.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.0",
@@ -74,6 +73,7 @@
     "build/**/*": "eslint"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1"
   }

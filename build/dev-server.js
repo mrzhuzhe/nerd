@@ -59,13 +59,13 @@ Object.keys(proxyTable).forEach(function (context) {
   if (typeof options === 'string') {
     options = { target: options }
   }
-  console.log(options.filter || context, options)
   app.use(proxyMiddleware(options.filter || context, options))
 });
 
-app.get(/^\/example/, function(req, res, next) {
-    var _path = '../dist/example/index.html';
-    res.end(fs.readFileSync(path.resolve(__dirname, _path), 'utf8'));
+app.get(/^\/(example|performance)/, function(req, res, next) {
+    var _paths = req.url.split('/');
+    var _baseUrl = '../dist/' + _paths[1] + '/index.html';
+    res.end(fs.readFileSync(path.resolve(__dirname, _baseUrl), 'utf8'));
 })
 
 // handle fallback for HTML5 history API
@@ -84,9 +84,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // serve pure static assets
-//var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
+var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 // console.log(staticPath);
-//app.use(staticPath, express.static('./static'))
+app.use(staticPath, express.static('./static'))
 
 var uri = 'http://localhost:' + port
 
