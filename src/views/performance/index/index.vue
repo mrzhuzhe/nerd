@@ -172,6 +172,7 @@ export default {
                 leftIcon: "mdi mdi-chevron-left"
             }
         })
+
       }
     },
 
