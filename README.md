@@ -31,12 +31,16 @@ npm run build
 npm run build --report
 ```
 
-# 目标实现的功能
-1. eslint vmrc  eslintignore editorconfig
-2. babel配置 postcss/pretty.js(待补充)
-3. static文件夹为静态文件模板/config为配置参数
-4. dev-server /hot -module/ less (BEM )/babel
-5. code split 大文件单独异步import /common trunk 公共文件单独vendor runtime单独vendor / cssnano
+# 实现的功能
+1. 项目基础设置: vmrc/gitignore
+2. babel: .rc 和 babel runtime配置
+3. eslint: eslint 配置 和 自动lint工具 pretter.js
+4. dev-server: 本地express开发服务器 和 mock.js 本地模拟cgi
+5. webpack基本配置：区分环境，各种loader配置, 
+5. webpack打包过程：commontrunk公共文件提取, css提取和优化, bundle分析等
+6. code-split: 在路由中使用import 异步加载文件，做分包
+7. 自定义打包过程：作用域提升插件 和 在webpack中hook自定义过程
+8. 性能优化：dll 多线程打包等 （开发中）
 
 # ToDo
 1. DLLPlugin 性能测试后加进来
