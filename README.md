@@ -46,7 +46,7 @@ npm run build --report
 
 ``` bash
 "devDependencies": {
-   # babel config start
+   # babel config
   "babel-core": "^6.26.3",    // babel 6.X 版本核心
   "babel-loader": "^7.1.4",   // babel 6.0 的 webpack loader
   "babel-plugin-syntax-jsx": "^6.18.0",   // babel 插件支持 jsx 核心语法
@@ -86,7 +86,7 @@ npm run build --report
   "semver": "^5.5.0",
   "staged-git-files": "^1.1.1",       // eslint 时 获取本地staged的文件
 
-  # webpack start
+  # webpack config
   "webpack": "^4.8.3",    
   "webpack-bundle-analyzer": "^2.13.0",   // webpack 打包分析器
   "webpack-dev-middleware": "^3.1.3",     // webpack dev server
