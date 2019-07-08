@@ -1,6 +1,6 @@
 {
   "name": "nerd",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "a simple frontend project tempplate\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[-\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D-initial-\u001b[template",
   "main": "index.js",
   "scripts": {
@@ -41,14 +41,19 @@
     "html-webpack-harddisk-plugin": "^0.2.0",
     "html-webpack-plugin": "^3.2.0",
     "http-proxy-middleware": "^0.18.0",
+    "jsonschema": "^1.2.4",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.0",
+    "mockjs": "^1.0.1-beta3",
     "optimize-css-assets-webpack-plugin": "^4.0.1",
     "ora": "^2.1.0",
+    "progress-bar-webpack-plugin": "^1.12.1",
     "raw-loader": "^0.5.1",
     "semver": "^5.5.0",
     "staged-git-files": "^1.1.1",
+    "svg-sprite-loader": "^4.1.6",
+    "url-loader": "^2.0.1",
     "vue-loader": "^15.2.0",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.8.3",
@@ -74,6 +79,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1"
   }

@@ -7,7 +7,7 @@ var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
 var bodyParser = require('body-parser')
-
+var mock = require('./mock');
 var config = require('../config')
 
 if (!process.env.NODE_ENV) {
@@ -62,9 +62,21 @@ Object.keys(proxyTable).forEach(function (context) {
   app.use(proxyMiddleware(options.filter || context, options))
 });
 
-app.get(/^\/(example)/, function(req, res, next) {
+/**
+ * 文件遍历方法
+ * @param filePath 需要遍历的文件路径
+ */
+// 调用文件遍历方法
+var utils = require('./utils')
+var _fList = utils.getEntries('./src/views/**/main.js');
+var _reg = new RegExp("^\/(" + Object.keys(_fList).join("|") + ")");
+app.get(_reg, function(req, res, next) {
     var _paths = req.url.split('/');
     var _baseUrl = '../dist/' + _paths[1] + '/index.html';
+    if (req.get('x-requested-with') === 'XMLHttpRequest') {
+        next();
+        return;
+    }
     res.end(fs.readFileSync(path.resolve(__dirname, _baseUrl), 'utf8'));
 })
 
@@ -88,6 +100,7 @@ var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsS
 // console.log(staticPath);
 app.use(staticPath, express.static('./static'))
 
+app.use(mock);
 var uri = 'http://localhost:' + port
 
 devMiddleware.waitUntilValid(function () {

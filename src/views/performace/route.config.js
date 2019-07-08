@@ -3,14 +3,14 @@
 } */
 
 let route = [{
-    path: '/example/index',
+    path: '/performace/index',
     name: 'index',
     meta: {
         title: '测试页面首页'
     },
     //  component: r => require.ensure([], () => r(require('./index/index.vue')), 'index')
     component: r => import(
-    /* webpackChunkName: "example-index" */
+    /* webpackChunkName: "performace-index" */
     './index/index.vue'
     )
 }];

@@ -77,6 +77,7 @@ var webpackConfig = merge(baseWebpackConfig, {
           }
       ])
   },
+  mode: "production",
   externals: {
       vue: 'Vue'
   },
