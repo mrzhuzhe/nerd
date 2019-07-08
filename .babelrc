@@ -11,7 +11,6 @@
       }],
       "transform-vue-jsx"
   ],
-  "comments": false,
   "env": {
     "test": {
       "presets": ["latest", "stage-2"],

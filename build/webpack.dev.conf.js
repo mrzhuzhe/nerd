@@ -44,6 +44,7 @@ module.exports = merge(baseWebpackConfig, {
         },
     ])
   },
+  mode: "development",
   resolve: {
 
   },
@@ -88,6 +89,13 @@ module.exports = merge(baseWebpackConfig, {
     })*/
   ],
   optimization: {
+      /*
+       作用域提升插件
+        [注意] 这个插件在 mode: production 时时默认开启的
+        这样配置时为了在 development 时也开启
+        https://webpack.js.org/configuration/optimization/#optimizationconcatenatemodules
+      */
+      concatenateModules: true,
       splitChunks: {
           cacheGroups: {
               commons: {
