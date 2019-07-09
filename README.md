@@ -3,17 +3,18 @@
 > A Project Template with some webpack config and .rc
 > Nerd is not cool , Nerd is Usefull
 
-### ChangeLog 2019/07/08
- hey 宝贝们 nerd 0.0.3 更新了
- 1. 修复了 dev-server 中取文件路径写死的问题  现在改用获取所有本地文件夹下路径为express路由
- ``` bash
- // 取到的路径 如 example | performance | ...
- utils.getEntries('./src/views/**/main.js')
- ```
- 2. 补充了url-loader 和 svg-sprite-loader
- 3. 增加了 `ProgressBarPlugin` 和 测试环境下作用域提升 `concatenateModules`
- 4. 关闭了 babel 的 `comment: false` 导致注释中语法糖失效的问题
- 5. 增加了 mock cgi 的功能 `./build/mock.js` 和 ajax 的功能 `./src/utils/ajax.js` 调用例子在 `./src/views/performace/index/index.vue`中
+### ChangeLog 2019/07/09
+ hey 宝贝们 这个分支 是专为 dll 打包准备的
+ 1. 现在 axios 和 vue-router 这种不需要变的模块被单独打进了 vendor.dll打包等
+ 并且在 index.html 中增加了一条单独的引用来引用
+``` javascript
+<script type="text/javascript" src="/static/direct/dll/vendor.dll.js"></script>
+```
+所以如果要使用，你需要把vendor.dll单独先发一波生产
+ 2. 并不需要单独增加依赖 dll 本身就是webpack中
+ 3. 其实 如果在extenal中排除 并用 script 标签引用，可以起到和dll相同的效果（仅性能提升方面，包管理方面领当别论）
+
+
 
 ## Build Setup
 
@@ -21,7 +22,10 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# build dll before you get start
+npm run dll
+
+# serve with hot reload at localhost:5389
 npm run dev
 
 # build for production with minification
@@ -36,15 +40,28 @@ npm run build --report
 2. babel: .rc 和 babel runtime配置
 3. eslint: eslint 配置 和 自动lint工具 pretter.js
 4. dev-server: 本地express开发服务器 和 mock.js 本地模拟cgi
-5. webpack基本配置：区分环境，各种loader配置, 
+5. webpack基本配置：区分环境，各种loader配置,
 5. webpack打包过程：commontrunk公共文件提取, css提取和优化, bundle分析等
 6. code-split: 在路由中使用import 异步加载文件，做分包
 7. 自定义打包过程：作用域提升插件 和 在webpack中hook自定义过程
-8. 性能优化：dll 多线程打包等 （开发中）
+8. 性能优化：优化打包速度, dll打包等
 
 # ToDo
-1. DLLPlugin 性能测试后加进来
-2. HappyPack 性能测试后加进来
+1. HappyPack 性能测试后加进来
+2. 升级 webpack 5 并了解其新特性
+
+
+### ChangeLog 2019/07/08
+ hey 宝贝们 nerd 0.0.3 更新了
+ 1. 修复了 dev-server 中取文件路径写死的问题  现在改用获取所有本地文件夹下路径为express路由
+ ``` bash
+ // 取到的路径 如 example | performance | ...
+ utils.getEntries('./src/views/**/main.js')
+ ```
+ 2. 补充了url-loader 和 svg-sprite-loader
+ 3. 增加了 `ProgressBarPlugin` 和 测试环境下作用域提升 `concatenateModules`
+ 4. 关闭了 babel 的 `comment: false` 导致注释中语法糖失效的问题
+ 5. 增加了 mock cgi 的功能 `./build/mock.js` 和 ajax 的功能 `./src/utils/ajax.js` 调用例子在 `./src/views/performace/index/index.vue`中
 
 # 依赖包的说明
 
