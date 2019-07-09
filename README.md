@@ -6,7 +6,7 @@
 ### ChangeLog 2019/07/08
  hey 宝贝们 nerd 0.0.3 更新了
  1. 修复了 dev-server 中取文件路径写死的问题  现在改用获取所有本地文件夹下路径为express路由
- ``` bash
+ ``` javascript
  // 取到的路径 如 example | performance | ...
  utils.getEntries('./src/views/**/main.js')
  ```
@@ -40,10 +40,10 @@ npm run build --report
 5. webpack打包过程：commontrunk公共文件提取, css提取和优化, bundle分析等
 6. code-split: 在路由中使用import 异步加载文件，做分包
 7. 自定义打包过程：作用域提升插件 和 在webpack中hook自定义过程
-8. 性能优化：dll 多线程打包等 （开发中）
+8. 性能优化：dll（开发中: 见pr https://github.com/mrzhuzhe/nerd/pull/6 ） 多线程打包等 
 
 # ToDo
-1. DLLPlugin 性能测试后加进来
+1. 升级到webpack 5 并了解其新特性
 2. HappyPack 性能测试后加进来
 
 # 依赖包的说明
