@@ -152,6 +152,12 @@ var webpackConfig = merge(baseWebpackConfig, {
       }
 
     ]) */
+    // 跟dll.config里面DllPlugin的context一致
+    new webpack.DllReferencePlugin({
+       context: process.cwd(),
+       // manifest: require(path.join(config.build.assetsRoot, config.build.assetsSubDirectory, 'js', 'vendor-manifest.json'))
+       manifest: require(path.join('../static/direct/dll', 'vendor-manifest.json'))
+    }),
   ],
   optimization: {
     minimizer: [
