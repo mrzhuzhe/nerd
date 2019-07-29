@@ -40,5 +40,6 @@ export default {
 <style lang="less">
 .page {
   padding: 10px;
+  margin: 10px;
 }
 </style>

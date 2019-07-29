@@ -7,11 +7,10 @@ let Validator = require('jsonschema').Validator;
 let Mock = require('mockjs');
 
 module.exports = function (req, res, next) {
-    // console.log(req,'12312312312');
     // // 调用文件遍历方法
     var utils = require('./utils')
     var _fList =  Object.keys(utils.getEntries('./dev/mock/*/'));
-   
+
     var newfList=[]
     for(var i = 0;i<_fList.length;++i){
         newfList.push(_fList[i].toString().substring(11))

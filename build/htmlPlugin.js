@@ -12,13 +12,13 @@ MyPlugin.prototype.apply = function(compiler) {
 
     compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tapAsync('convertFilePathBeforeProcess', (htmlPluginData, cb) => {
      // Do stuff
-     console.log(htmlPluginData.assets)
+     // console.log(htmlPluginData.assets)
      cb(null, htmlPluginData);
     })
 
     compilation.hooks.htmlWebpackPluginAfterHtmlProcessing.tapAsync('onvertFilePathAfterProcess', (htmlPluginData, cb) => {
      // Do stuff
-     console.log(htmlPluginData.assets)
+     // console.log(htmlPluginData.assets)
      cb(null, htmlPluginData);
     })
 
