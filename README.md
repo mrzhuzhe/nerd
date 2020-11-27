@@ -3,6 +3,20 @@
 > A Project Template with some webpack config and .rc
 > Nerd is not cool , Nerd is Usefull
 
+## ChangeLog 2020/11/26
+threejs调研记录
+已处理：
+- 几何动画相关：位移，形变，随机分布，群组
+- 导入模型， 导入材质
+- 镜头轨道
+
+待处理：
+- vr context
+- 光源，阴影，着色器等
+- 交互事件响应
+- 自定义geometry
+
+
 ### ChangeLog 2019/07/08
  hey 宝贝们 nerd 0.0.3 更新了
  1. 修复了 dev-server 中取文件路径写死的问题  现在改用获取所有本地文件夹下路径为express路由
