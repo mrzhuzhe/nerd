@@ -21,7 +21,7 @@ scene.add(cone02);
 scene.add(cone03);
 scene.add(cone04);
 scene.add(cone05);
-//hatsune_miku();
+hatsune_miku();
 
 /*
 console.log(tube1)
@@ -82,8 +82,8 @@ function animate() {
     requestAnimationFrame( animate );
     
 
-    //pavingStones01.rotation.x -= 0.01;
-    //pavingStones01.rotation.y -= 0.01;
+    pavingStones01.rotation.x -= 0.01;
+    pavingStones01.rotation.y -= 0.01;
     
     /*
     blue_line.rotation.x += 0.01;

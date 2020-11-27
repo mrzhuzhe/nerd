@@ -22,7 +22,7 @@ var hatsune_miku = function () {
 
         var mesh = object;
         mesh.position.y = -250;
-        mesh.position.x = 500
+        mesh.position.x = -500
         mesh.scale.x = 30
         mesh.scale.y = 30
         mesh.scale.z = 30

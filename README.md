@@ -13,8 +13,12 @@ threejs调研记录
 待处理：
 - vr context
 - 光源，阴影，着色器等
-- 交互事件响应
+- 交互事件响应, 物理效果
 - 自定义geometry
+- 骨架动画
+
+BUG:
+- 查一下webworker为啥会在编译后有问题
 
 
 ### ChangeLog 2019/07/08
