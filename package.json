@@ -80,6 +80,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "puppeteer": "^10.2.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1"
   }
