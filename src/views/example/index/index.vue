@@ -50,6 +50,7 @@ export default {
     },
 
     methods: {
+      
       initChart () {
         var canvas = document.querySelector("canvas"),
             context = canvas.getContext("2d");
@@ -162,7 +163,6 @@ export default {
         })
       }
     },
-
     mounted() {
       this.initChart();
       this.initDatePicker();

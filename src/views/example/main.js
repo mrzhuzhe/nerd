@@ -4,7 +4,7 @@ import './runBeforeRequire';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import configRouter from './route.config';
-import App from './App.vue';
+import App from './app.vue';
 
 Vue.use(VueRouter);
 

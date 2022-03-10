@@ -116,6 +116,7 @@ module.exports = merge(baseWebpackConfig, {
       },
       minimizer: [
         // we specify a custom UglifyJsPlugin here to get source maps in production
+        /*
         new UglifyJsPlugin({
           cache: true,
           parallel: true,
@@ -128,6 +129,7 @@ module.exports = merge(baseWebpackConfig, {
           },
           sourceMap: true
         }),
+        */
         new OptimizeCSSPlugin({
           cssProcessorOptions: {
             autoprefixer: {

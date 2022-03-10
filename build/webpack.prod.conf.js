@@ -156,6 +156,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   optimization: {
     minimizer: [
       // we specify a custom UglifyJsPlugin here to get source maps in production
+      /*
       new UglifyJsPlugin({
         cache: true,
         parallel: true,
@@ -167,7 +168,7 @@ var webpackConfig = merge(baseWebpackConfig, {
           mangle: true
         },
         sourceMap: true
-      }),
+      }), */
       new OptimizeCSSPlugin({
         cssProcessorOptions: {
           autoprefixer: {
